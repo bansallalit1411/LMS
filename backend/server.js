@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin:["https://lms-yce2.onrender.com"],
+    origin:["https://lms-frontend-eta-orcin.vercel.app/"],
     credentials: true,
   })
 );
