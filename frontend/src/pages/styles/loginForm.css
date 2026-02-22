@@ -1,0 +1,153 @@
+/* ===== BASE ===== */
+.login-page {
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== THEMES ===== */
+.student-theme {
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+.admin-theme {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+}
+
+/* ===== HERO (SAME FOR BOTH) ===== */
+.login-hero {
+  height: 35vh;              /* 🔥 SAME HEIGHT */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #f8fafc;
+  text-align: center;
+  padding: 2rem;
+}
+
+.login-hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.login-hero p {
+  color: #cbd5e1;
+  font-size: 1.05rem;
+}
+
+/* ===== FORM SECTION ===== */
+.login-section {
+  margin-top: -50px;         /* 🔥 clean overlap */
+  display: flex;
+  justify-content: center;
+  padding-bottom: 3.5rem;
+}
+
+/* ===== FORM CARD ===== */
+.login-form-card {
+  background: white;
+  padding: 2.6rem;
+  width: 380px;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+  text-align: center;
+  animation: fadeUp 0.7s ease;
+}
+
+/* ADMIN ACCENT */
+.login-form-card.admin {
+  border-top: 6px solid #ef4444;
+}
+
+/* STUDENT ACCENT */
+.login-form-card.student {
+  border-top: 6px solid #2563eb;
+}
+
+.login-form-card h2 {
+  margin-bottom: 1.4rem;
+  font-size: 1.6rem;
+}
+
+/* ===== INPUTS ===== */
+.login-form-card input {
+  width: 100%;
+  padding: 0.9rem;
+  margin-bottom: 1.1rem;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.95rem;
+}
+
+.login-form-card input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* ===== BUTTON ===== */
+.login-form-card button {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.login-form-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(37,99,235,0.35);
+}
+
+/* ===== INFO ===== */
+.login-info {
+  padding: 3rem 2rem;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.login-info h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.login-info p {
+  max-width: 600px;
+  margin: auto;
+  color: #475569;
+  line-height: 1.8;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 600px) {
+  .login-hero {
+    height: 30vh;
+  }
+
+  .login-section {
+    margin-top: 1rem;
+  }
+
+  .login-form-card {
+    width: 90%;
+    padding: 2rem;
+  }
+}
