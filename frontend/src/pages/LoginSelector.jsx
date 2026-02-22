@@ -7,7 +7,7 @@ export default function LoginSelector() {
   return (
     <div className="selector-page">
       <div className="selector-box">
-        <h1>Library Management System</h1>
+        <h1>Scholar's Central Library</h1>
         <p>Select how you want to login</p>
 
         <div className="role-cards">
