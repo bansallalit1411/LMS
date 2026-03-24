@@ -86,7 +86,7 @@ export default function Requests({ onStatsChange }) {
           pending.length === 0 ? (
             <div className="empty-state">
               <div className="empty-icon">✅</div>
-              <div className="empty-text">No pending requests — all caught up!</div>
+              <div className="empty-text">No pending requests - all caught up!</div>
             </div>
           ) : (
             <div className="table-wrap">

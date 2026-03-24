@@ -3,19 +3,23 @@ import { useNavigate } from "react-router-dom";
 import api from "../api";
 
 export default function SignUp() {
-  const [form, setForm] = useState({ name: "", email: "", rollNo: "", password: "", confirm: "" });
-  const [showPass, setShowPass]       = useState(false);
+  const [form, setForm] = useState({ name: "", rollNo: "", branch: "", password: "", confirm: "" });
+  const [showPass,    setShowPass]    = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [loading, setLoading]         = useState(false);
-  const [error, setError]             = useState("");
-  const [success, setSuccess]         = useState(false);
+  const [loading,  setLoading]  = useState(false);
+  const [error,    setError]    = useState("");
+  const [success,  setSuccess]  = useState(false);
   const navigate = useNavigate();
 
   const set = (k) => (e) => setForm((p) => ({ ...p, [k]: e.target.value }));
 
+  // Auto-generate email preview from roll number
+  const emailPreview = form.rollNo.trim()
+    ? `${form.rollNo.trim().toLowerCase()}@nitkkr.ac.in`
+    : "";
+
   const validate = () => {
     if (!form.name.trim())        return "Full name is required.";
-    if (!form.email.trim())       return "Email address is required.";
     if (!form.rollNo.trim())      return "Roll number is required.";
     if (form.password.length < 6) return "Password must be at least 6 characters.";
     if (form.password !== form.confirm) return "Passwords do not match.";
@@ -29,8 +33,11 @@ export default function SignUp() {
     setLoading(true);
     try {
       await api.post("/auth/register", {
-        name: form.name, email: form.email,
-        rollNo: form.rollNo, password: form.password, role: "student",
+        name:     form.name.trim(),
+        rollNo:   form.rollNo.trim(),
+        branch:   form.branch.trim(),
+        password: form.password,
+        // email is derived on the backend — no need to send it
       });
       setSuccess(true);
       setTimeout(() => navigate("/login/student"), 2200);
@@ -47,12 +54,12 @@ export default function SignUp() {
     <>
       <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
       <style>{`
-        @keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
-        @keyframes shimmer{0%{background-position:-200% center;}100%{background-position:200% center;}}
-        @keyframes pulse-glow{0%,100%{box-shadow:0 0 20px rgba(184,134,11,.3);}50%{box-shadow:0 0 50px rgba(184,134,11,.6);}}
-        @keyframes grain{0%,100%{transform:translate(0,0);}10%{transform:translate(-2%,-3%);}20%{transform:translate(1%,2%);}30%{transform:translate(-1%,1%);}40%{transform:translate(2%,-1%);}50%{transform:translate(-2%,2%);}60%{transform:translate(1%,-2%);}70%{transform:translate(-1%,3%);}80%{transform:translate(2%,1%);}90%{transform:translate(-2%,-1%);}}
-        @keyframes success-pop{0%{transform:scale(.8);opacity:0;}100%{transform:scale(1);opacity:1;}}
-        @keyframes progress{from{width:0;}to{width:100%;}}
+        @keyframes fadeUp    { from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);} }
+        @keyframes shimmer   { 0%{background-position:-200% center;}100%{background-position:200% center;} }
+        @keyframes pulse-glow{ 0%,100%{box-shadow:0 0 20px rgba(184,134,11,.3);}50%{box-shadow:0 0 50px rgba(184,134,11,.6);} }
+        @keyframes grain     { 0%,100%{transform:translate(0,0);}10%{transform:translate(-2%,-3%);}20%{transform:translate(1%,2%);}30%{transform:translate(-1%,1%);}40%{transform:translate(2%,-1%);}50%{transform:translate(-2%,2%);}60%{transform:translate(1%,-2%);}70%{transform:translate(-1%,3%);}80%{transform:translate(2%,1%);}90%{transform:translate(-2%,-1%);} }
+        @keyframes success-pop{ 0%{transform:scale(.8);opacity:0;}100%{transform:scale(1);opacity:1;} }
+        @keyframes progress  { from{width:0;}to{width:100%;} }
 
         *{box-sizing:border-box;margin:0;padding:0;}
         ::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:#0D0A08;}::-webkit-scrollbar-thumb{background:#B8860B;border-radius:3px;}
@@ -95,6 +102,10 @@ export default function SignUp() {
         .su-eye{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:transparent;border:none;cursor:pointer;font-size:1rem;opacity:.45;transition:opacity .2s;}
         .su-eye:hover{opacity:.9;}
 
+        /* Email preview box */
+        .su-email-box{width:100%;background:rgba(184,134,11,.05);border:1px solid rgba(184,134,11,.25);border-radius:2px;padding:13px 18px;color:#DAA520;font-family:'Raleway',sans-serif;font-size:.88rem;display:flex;align-items:center;gap:10px;}
+        .su-email-placeholder{color:rgba(196,184,154,.3);font-size:.88rem;}
+
         .su-div{display:flex;align-items:center;gap:12px;margin:2px 0 18px;}
         .su-div-line{flex:1;height:1px;background:rgba(184,134,11,.12);}
         .su-div-txt{font-size:.7rem;color:#8B7355;letter-spacing:.1em;text-transform:uppercase;}
@@ -106,30 +117,34 @@ export default function SignUp() {
         .su-btn:disabled{opacity:.65;cursor:wait;}
 
         .su-err{display:flex;align-items:flex-start;gap:10px;background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);border-radius:2px;padding:13px 16px;color:#f87171;font-size:.85rem;margin-top:14px;line-height:1.5;}
-
-        /* ── Already have an account ── */
         .su-have{text-align:center;margin-top:26px;font-size:.86rem;color:#8B7355;}
-        .su-signin{background:none;border:none;cursor:pointer;color:#DAA520;font-family:'Raleway',sans-serif;font-size:.86rem;font-weight:600;letter-spacing:.03em;text-decoration:underline;text-underline-offset:3px;transition:color .2s;padding:0;}
+        .su-signin{background:none;border:none;cursor:pointer;color:#DAA520;font-family:'Raleway',sans-serif;font-size:.86rem;font-weight:600;text-decoration:underline;text-underline-offset:3px;transition:color .2s;padding:0;}
         .su-signin:hover{color:#FFD700;}
-
         .su-back{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;color:#8B7355;cursor:pointer;background:none;border:none;margin-top:14px;transition:color .2s;font-family:'Raleway',sans-serif;}
         .su-back:hover{color:#DAA520;}
 
         .su-success{position:fixed;inset:0;z-index:9998;background:rgba(13,10,8,.92);display:flex;align-items:center;justify-content:center;backdrop-filter:blur(8px);}
-        .su-sc{text-align:center;padding:60px 56px;border:1px solid rgba(184,134,11,.3);border-radius:4px;background:#110D09;max-width:420px;animation:success-pop .5s cubic-bezier(.34,1.56,.64,1) forwards;}
+        .su-sc{text-align:center;padding:60px 56px;border:1px solid rgba(184,134,11,.3);border-radius:4px;background:#110D09;max-width:440px;animation:success-pop .5s cubic-bezier(.34,1.56,.64,1) forwards;}
         .su-pb{height:3px;border-radius:2px;background:rgba(184,134,11,.15);overflow:hidden;margin-top:24px;}
         .su-pf{height:100%;background:linear-gradient(90deg,#B8860B,#DAA520);animation:progress 2.2s linear forwards;}
 
         @media(max-width:900px){.su-left{display:none;}.su-right{padding:40px 24px;}.su-row2{grid-template-columns:1fr;}}
       `}</style>
 
+      {/* Success overlay */}
       {success && (
         <div className="su-success">
           <div className="su-sc">
             <div style={{ fontSize:"3.5rem", marginBottom:"20px" }}>✅</div>
             <h2 style={{ fontFamily:"'Cinzel',serif", fontSize:"1.7rem", color:"#F5F0E8", marginBottom:"14px" }}>Account Created!</h2>
-            <p style={{ fontFamily:"'EB Garamond',serif", fontSize:"1.05rem", color:"#8B7355", lineHeight:1.75, fontStyle:"italic" }}>
-              Welcome to Bibliotheca. Redirecting you to sign in…
+            <p style={{ fontFamily:"'EB Garamond',serif", fontSize:"1.05rem", color:"#C4B89A", lineHeight:1.75, fontStyle:"italic", marginBottom:"12px" }}>
+              Welcome to NIT-KKR LMS. Your library email is:
+            </p>
+            <div style={{ fontFamily:"'Raleway',sans-serif", fontSize:"1rem", color:"#DAA520", fontWeight:600, padding:"10px 20px", background:"rgba(184,134,11,.1)", border:"1px solid rgba(184,134,11,.25)", borderRadius:"4px", marginBottom:"8px" }}>
+              {emailPreview}
+            </div>
+            <p style={{ fontFamily:"'EB Garamond',serif", fontSize:".9rem", color:"#8B7355", fontStyle:"italic" }}>
+              Redirecting you to sign in…
             </p>
             <div className="su-pb"><div className="su-pf" /></div>
           </div>
@@ -140,29 +155,29 @@ export default function SignUp() {
 
       <div className="su-page">
 
-        {/* ══ LEFT ══ */}
+        {/* ── LEFT PANEL ── */}
         <div className="su-left">
           <button className="su-brand" onClick={() => navigate("/")}>
             <div className="su-brand-icon">📚</div>
             <div>
-              <div style={{ fontFamily:"'Cinzel',serif", fontWeight:700, fontSize:"1.15rem" }} className="gold-sh">BIBLIOTHECA</div>
-              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize:"0.58rem", letterSpacing:"0.22em", color:"#8B7355", textTransform:"uppercase", marginTop:"-2px" }}>Library Management</div>
+              <div style={{ fontFamily:"'Cinzel',serif", fontWeight:700, fontSize:"1.15rem" }} className="gold-sh">NIT-KKR LMS</div>
+              <div style={{ fontFamily:"'Raleway',sans-serif", fontSize:".58rem", letterSpacing:".22em", color:"#8B7355", textTransform:"uppercase", marginTop:"-2px" }}>NIT Kurukshetra</div>
             </div>
           </button>
 
           <div className="su-lb">
-            <div className="su-eyebrow">New Member</div>
+            <div className="su-eyebrow">Student Portal</div>
             <h1 className="su-lt">Begin Your<br />Literary<br /><span className="gold-sh">Journey</span></h1>
-            <p className="su-ld">Join thousands of readers who have made Bibliotheca their scholarly home. Free. Forever.</p>
+            <p className="su-ld">Your NIT Kurukshetra library account — access 50,000+ books, request titles, and track your reading history.</p>
           </div>
 
           <div className="su-perks">
             {[
-              { icon:"📚", text:"Access 50,000+ books instantly" },
-              { icon:"🔖", text:"Personalised reading lists & bookmarks" },
-              { icon:"⚡", text:"Reserve books in seconds, anywhere" },
-              { icon:"🤝", text:"Join community clubs & author events" },
-            ].map((p,i) => (
+              { icon:"🎓", text:"Your roll number becomes your library ID" },
+              { icon:"📧", text:"Email auto-set as rollno@nitkkr.ac.in"    },
+              { icon:"📚", text:"Access 50,000+ books instantly"            },
+              { icon:"⚡", text:"Reserve books in seconds, anywhere"        },
+            ].map((p, i) => (
               <div className="su-perk" key={i}>
                 <span style={{ fontSize:"1.05rem", flexShrink:0 }}>{p.icon}</span>
                 <span>{p.text}</span>
@@ -171,49 +186,75 @@ export default function SignUp() {
           </div>
         </div>
 
-        {/* ══ RIGHT ══ */}
+        {/* ── RIGHT PANEL ── */}
         <div className="su-right">
           <div className="su-fw">
             <div className="su-ft">
               <h2 className="su-title">Create Account</h2>
-              <p className="su-sub">Fill in your details to get started — it's completely free</p>
+              <p className="su-sub">Register with your NIT Kurukshetra roll number</p>
             </div>
 
+            {/* Name + Roll No */}
             <div className="su-row2">
               <div className="su-field">
-                <label className="su-label">Full Name</label>
-                <input className="su-input" placeholder="Jane Austen" value={form.name} onChange={set("name")} onKeyDown={handleKey} />
+                <label className="su-label">Full Name *</label>
+                <input className="su-input" placeholder="e.g. Rahul Sharma" value={form.name} onChange={set("name")} onKeyDown={handleKey} />
               </div>
               <div className="su-field">
-                <label className="su-label">Roll Number</label>
-                <input className="su-input" placeholder="2024CS001" value={form.rollNo} onChange={set("rollNo")} onKeyDown={handleKey} />
+                <label className="su-label">Roll Number *</label>
+                <input className="su-input" placeholder="e.g. 22cseb14" value={form.rollNo} onChange={set("rollNo")} onKeyDown={handleKey} />
               </div>
             </div>
 
+            {/* Branch */}
             <div className="su-field">
-              <label className="su-label">Email Address</label>
-              <input className="su-input" type="email" placeholder="jane@university.edu" value={form.email} onChange={set("email")} onKeyDown={handleKey} />
+              <label className="su-label">Branch</label>
+              <input className="su-input" placeholder="e.g. Computer Science &amp; Engineering" value={form.branch} onChange={set("branch")} onKeyDown={handleKey} />
+            </div>
+
+            {/* Auto-generated email preview — read-only */}
+            <div className="su-field">
+              <label className="su-label">
+                Library Email
+                <span style={{ marginLeft:"8px", fontSize:".65rem", color:"#B8860B", fontStyle:"italic", textTransform:"none", letterSpacing:0 }}>
+                  (auto-generated)
+                </span>
+              </label>
+              {emailPreview ? (
+                <div className="su-email-box">
+                  <span style={{ fontSize:"1rem" }}>📧</span>
+                  <span>{emailPreview}</span>
+                  <span style={{ marginLeft:"auto", fontSize:".65rem", color:"rgba(184,134,11,.5)" }}>read-only</span>
+                </div>
+              ) : (
+                <div className="su-email-box">
+                  <span style={{ fontSize:"1rem", opacity:.4 }}>📧</span>
+                  <span className="su-email-placeholder">Enter roll number to see your email</span>
+                </div>
+              )}
             </div>
 
             <div className="su-div"><div className="su-div-line"/><span className="su-div-txt">Security</span><div className="su-div-line"/></div>
 
+            {/* Password */}
             <div className="su-field">
-              <label className="su-label">Password</label>
+              <label className="su-label">Password *</label>
               <div className="su-iw">
-                <input className="su-input" type={showPass?"text":"password"} placeholder="At least 6 characters" value={form.password} onChange={set("password")} onKeyDown={handleKey} style={{ paddingRight:"46px" }} />
-                <button className="su-eye" onClick={() => setShowPass(!showPass)}>{showPass?"🙈":"👁️"}</button>
+                <input className="su-input" type={showPass ? "text" : "password"} placeholder="At least 6 characters" value={form.password} onChange={set("password")} onKeyDown={handleKey} style={{ paddingRight:"46px" }} />
+                <button className="su-eye" onClick={() => setShowPass(!showPass)}>{showPass ? "🙈" : "👁️"}</button>
               </div>
             </div>
 
+            {/* Confirm */}
             <div className="su-field">
-              <label className="su-label">Confirm Password</label>
+              <label className="su-label">Confirm Password *</label>
               <div className="su-iw">
-                <input className="su-input" type={showConfirm?"text":"password"} placeholder="Repeat your password" value={form.confirm} onChange={set("confirm")} onKeyDown={handleKey} style={{ paddingRight:"46px" }} />
-                <button className="su-eye" onClick={() => setShowConfirm(!showConfirm)}>{showConfirm?"🙈":"👁️"}</button>
+                <input className="su-input" type={showConfirm ? "text" : "password"} placeholder="Repeat your password" value={form.confirm} onChange={set("confirm")} onKeyDown={handleKey} style={{ paddingRight:"46px" }} />
+                <button className="su-eye" onClick={() => setShowConfirm(!showConfirm)}>{showConfirm ? "🙈" : "👁️"}</button>
               </div>
             </div>
 
-            <p style={{ fontFamily:"'Raleway',sans-serif", fontSize:"0.74rem", color:"#8B7355", lineHeight:1.6, marginBottom:"6px" }}>
+            <p style={{ fontFamily:"'Raleway',sans-serif", fontSize:".74rem", color:"#8B7355", lineHeight:1.6, marginBottom:"6px" }}>
               By creating an account you agree to our{" "}
               <span style={{ color:"#B8860B", cursor:"pointer", textDecoration:"underline", textUnderlineOffset:"2px" }}>Terms of Service</span>
               {" "}and{" "}
@@ -231,12 +272,9 @@ export default function SignUp() {
               </div>
             )}
 
-            {/* ── Already have an account? → opens LoginSelector ── */}
             <div className="su-have">
               Already have an account?{" "}
-              <button className="su-signin" onClick={() => navigate("/login")}>
-                Sign in here
-              </button>
+              <button className="su-signin" onClick={() => navigate("/login")}>Sign in here</button>
             </div>
 
             <div style={{ textAlign:"center" }}>

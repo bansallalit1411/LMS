@@ -52,7 +52,7 @@ export default function AdminDashboard() {
         <div className="sidebar-logo">
           <div className="sidebar-logo-icon">📚</div>
           <div>
-            <div className="sidebar-logo-text">BIBLIOTHECA</div>
+            <div className="sidebar-logo-text">NIT-KKR LMS</div>
             <div className="sidebar-logo-sub">Admin Panel</div>
           </div>
         </div>

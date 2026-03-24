@@ -276,7 +276,7 @@ export default function StudentDashboard({ user }) {
         <div className="sd-logo" onClick={() => navigate("/")}>
           <div className="sd-logo-icon">📚</div>
           <div>
-            <div className="sd-logo-name">BIBLIOTHECA</div>
+            <div className="sd-logo-name">NIT-KKR LMS</div>
             <div className="sd-logo-sub">Student Portal</div>
           </div>
         </div>

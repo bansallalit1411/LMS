@@ -12,10 +12,10 @@ const BOOKS = [
 ];
 
 const STATS = [
-  { value:"50,000+", label:"Books Available"      },
-  { value:"12,000+", label:"Active Members"       },
-  { value:"200+",    label:"New Arrivals Monthly" },
-  { value:"98%",     label:"Member Satisfaction"  },
+  { value:"10,000+", label:"Books Available"      },
+  { value:"4,000+", label:"Active Members"       },
+  { value:"100+",    label:"New Arrivals Monthly" },
+  { value:"90%",     label:"Member Satisfaction"  },
 ];
 
 const FEATURES = [
@@ -28,24 +28,24 @@ const FEATURES = [
 ];
 
 const TESTIMONIALS = [
-  { name:"Amelia Rhodes", role:"Literature Professor",  avatar:"AR", text:"This platform has transformed how I guide my students through literature. The collection is unparalleled." },
-  { name:"Marcus Chen",   role:"Avid Reader",           avatar:"MC", text:"The reservation system is seamless. I've discovered so many hidden gems through the recommendation engine." },
-  { name:"Sofia Laurent", role:"Book Club Organizer",   avatar:"SL", text:"Managing our reading club has never been easier. The community features are simply outstanding."           },
+  { name:"Lalit Bansal", role:"Literature Professor",  avatar:"LB", text:"This platform has transformed how I guide my students through literature. The collection is unparalleled." },
+  { name:"Tushar",   role:"Avid Reader",           avatar:"TS", text:"The reservation system is seamless. I've discovered so many hidden gems through the recommendation engine." },
+  { name:"Deepak ", role:"Book Club Organizer",   avatar:"DP", text:"Managing our reading club has never been easier. The community features are simply outstanding."           },
 ];
 
 const TEAM = [
-  { name:"Eleanor Voss",  role:"Head Librarian",  avatar:"EV", desc:"25 years curating world-class collections across three continents." },
-  { name:"James Hartley", role:"Digital Director", avatar:"JH", desc:"Pioneer of modern library technology platforms since 2004."        },
-  { name:"Priya Nair",    role:"Community Lead",   avatar:"PN", desc:"Building literary communities and reader programs since 2010."     },
+  { name:"Dr. Shweta Sharma",  role:"Head Librarian",  avatar:"SS", desc:"3 years curating world-class collections across three continents." },
+  { name:"Dr. B.V. Ramana Reddy", role:"Director", avatar:"BV", desc:"Pioneer of modern library technology platforms since 2022."        },
+  { name:"Jishan Joshi",    role:"Community Lead",   avatar:"JJ", desc:"Building literary communities and reader programs since 2024."     },
 ];
 
 const CATEGORIES = ["All","Classic","Dystopian","Fiction","Sci-Fi","Romance","Adventure"];
 
 const CONTACT_INFO = [
-  { icon:"📍", label:"Address", value:"12 Scholar's Lane, Literary Quarter" },
-  { icon:"📞", label:"Phone",   value:"+1 (800) 555-0192"                  },
-  { icon:"✉️", label:"Email",   value:"hello@NITKLMS.lib"              },
-  { icon:"🕐", label:"Hours",   value:"Mon – Sat  8 am – 9 pm"            },
+  { icon:"📍", label:"Address", value:"Thanesar, Kurukshetra, Haryana (136119), India" },
+  { icon:"📞", label:"Phone",   value:"01744 233 208"                  },
+  { icon:"✉️", label:"Email",   value:"NITKKRLMS@nitkkr.ac.in"              },
+  { icon:"🕐", label:"Hours",   value:"Mon – Sat  9 am – 5 pm"            },
 ];
 
 /* ─── CSS string (injected once via useEffect) ───────────────────────────── */
@@ -311,7 +311,7 @@ export default function HomePage() {
             style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:"12px" }}>
             <div style={{ width:"40px", height:"40px", border:"2px solid #B8860B", borderRadius:"4px", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"18px", animation:"pulseGlow 3s ease-in-out infinite" }}>📚</div>
             <div>
-              <div style={{ fontFamily:"'Cinzel',serif", fontWeight:700, fontSize:"1.2rem", letterSpacing:".08em" }} className="hp-gold">NITKLMS</div>
+              <div style={{ fontFamily:"'Cinzel',serif", fontWeight:700, fontSize:"1.2rem", letterSpacing:".08em" }} className="hp-gold">NITKKRLMS</div>
               <div style={{ fontFamily:"'Raleway',sans-serif", fontSize:".58rem", letterSpacing:".25em", color:"#8B7355", textTransform:"uppercase", marginTop:"-2px" }}>Library Management</div>
             </div>
           </button>
@@ -330,7 +330,7 @@ export default function HomePage() {
             <button className="hp-btn-outline" style={{ padding:"8px 22px", fontSize:".75rem", borderRadius:"2px" }}
               onClick={() => navigate("/login")}>Sign In</button>
             <button className="hp-btn-primary" style={{ padding:"8px 22px", fontSize:".75rem", borderRadius:"2px" }}
-              onClick={() => navigate("/signup")}>Join Free</button>
+              onClick={() => navigate("/signup")}>Sign Up</button>
             <button onClick={() => setMenuOpen(true)}
               style={{ background:"none", border:"none", color:"#B8860B", cursor:"pointer", fontSize:"22px", marginLeft:"8px" }}>☰</button>
           </div>
@@ -355,7 +355,7 @@ export default function HomePage() {
           <button className="hp-btn-outline" style={{ padding:"12px", fontSize:".8rem", borderRadius:"2px" }}
             onClick={() => { navigate("/login");  setMenuOpen(false); }}>Sign In</button>
           <button className="hp-btn-primary"  style={{ padding:"12px", fontSize:".8rem", borderRadius:"2px" }}
-            onClick={() => { navigate("/signup"); setMenuOpen(false); }}>Join Free</button>
+            onClick={() => { navigate("/signup"); setMenuOpen(false); }}>Sign Up</button>
         </div>
       </div>
 
@@ -373,11 +373,11 @@ export default function HomePage() {
 
         <div style={{ maxWidth:"900px", textAlign:"center", position:"relative" }}>
 
-          {/* Pill badge */}
+          {/* Pill badge
           <div className="hp-hero-badge" style={{ display:"inline-flex", alignItems:"center", gap:"10px", border:"1px solid rgba(184,134,11,.35)", padding:"6px 18px", borderRadius:"100px", marginBottom:"32px", fontFamily:"'Raleway',sans-serif", fontSize:".72rem", letterSpacing:".18em", color:"#DAA520", textTransform:"uppercase" }}>
             <span style={{ width:"6px", height:"6px", background:"#DAA520", borderRadius:"50%", animation:"pulseGlow 2s infinite" }} />
             Now with Digital &amp; Audio Collections
-          </div>
+          </div> */}
 
           {/* Eyebrow */}
           <div className="hp-hero-sub" style={{ fontSize:".9rem", fontFamily:"'Raleway',sans-serif", letterSpacing:".3em", color:"#8B7355", textTransform:"uppercase", marginBottom:"16px" }}>
@@ -386,9 +386,9 @@ export default function HomePage() {
 
           {/* Headline */}
           <h1 className="hp-hero-title" style={{ fontFamily:"'Cinzel',serif", fontWeight:700, lineHeight:1.05, marginBottom:"28px" }}>
-            <span style={{ display:"block", fontSize:"clamp(3.5rem,9vw,7.5rem)", letterSpacing:"-.02em", color:"#F5F0E8" }}>The Art of</span>
-            <span style={{ display:"block", fontSize:"clamp(3.5rem,9vw,7.5rem)", letterSpacing:"-.02em" }} className="hp-gold">Reading Lives</span>
-            <span style={{ display:"block", fontSize:"clamp(3.5rem,9vw,7.5rem)", letterSpacing:"-.02em", color:"#F5F0E8" }}>Here.</span>
+            <span style={{ display:"block", fontSize:"clamp(3.5rem,9vw,7.5rem)", letterSpacing:"-.02em", color:"#F5F0E8" }}>NIT KKR</span>
+            <span style={{ display:"block", fontSize:"clamp(3.5rem,9vw,7.5rem)", letterSpacing:"-.02em" }} className="hp-gold">LIBRARY MANAGEMENT</span>
+            <span style={{ display:"block", fontSize:"clamp(3.5rem,9vw,7.5rem)", letterSpacing:"-.02em", color:"#F5F0E8" }}>SYSTEM.</span>
           </h1>
 
           <p className="hp-hero-sub" style={{ fontSize:"clamp(1rem,2vw,1.25rem)", color:"#C4B89A", lineHeight:1.8, maxWidth:"600px", margin:"0 auto 48px", fontStyle:"italic" }}>
@@ -459,7 +459,7 @@ export default function HomePage() {
           <div style={S.sectionHead}>
             <div style={S.eyebrow}><span className="hp-ornament">✦</span> Curated Selection <span className="hp-ornament">✦</span></div>
             <h2 style={S.h2}>Explore the Collection</h2>
-            <p style={{ color:"#8B7355", fontSize:"1.05rem", maxWidth:"500px", margin:"20px auto 0", fontStyle:"italic", lineHeight:1.7 }}>From timeless classics to contemporary masterpieces — find your next great read.</p>
+            <p style={{ color:"#8B7355", fontSize:"1.05rem", maxWidth:"500px", margin:"20px auto 0", fontStyle:"italic", lineHeight:1.7 }}>From timeless classics to contemporary masterpieces, find your next great read.</p>
             <div style={S.divider} />
           </div>
 
@@ -544,7 +544,7 @@ export default function HomePage() {
       <section style={S.section({ background:"rgba(184,134,11,.03)", borderTop:"1px solid rgba(184,134,11,.1)", borderBottom:"1px solid rgba(184,134,11,.1)" })}>
         <div style={S.container}>
           <div style={S.sectionHead}>
-            <div style={S.eyebrow}><span className="hp-ornament">✦</span> Why NITKLMS <span className="hp-ornament">✦</span></div>
+            <div style={S.eyebrow}><span className="hp-ornament">✦</span> Why NIT KKR-LMS <span className="hp-ornament">✦</span></div>
             <h2 style={S.h2}>Everything You Need</h2>
             <div style={S.divider} />
           </div>
@@ -570,10 +570,10 @@ export default function HomePage() {
           {/* Header */}
           <div style={{ textAlign:"center", marginBottom:"72px" }}>
             <div style={S.eyebrow}><span className="hp-ornament">✦</span> Our Story <span className="hp-ornament">✦</span></div>
-            <h2 style={S.h2}>About NITKLMS</h2>
+            <h2 style={S.h2}>About NIT-KKR LMS</h2>
             <div style={{ ...S.divider, margin:"28px auto 40px" }} />
             <p style={{ fontFamily:"'EB Garamond',serif", fontSize:"clamp(1rem,2vw,1.2rem)", color:"#C4B89A", lineHeight:2, maxWidth:"760px", margin:"0 auto", fontStyle:"italic" }}>
-              Founded in 1892, NITKLMS has stood as a beacon of knowledge and culture for over a century. What began as a modest reading room of 400 volumes has grown into one of the most comprehensive digital and physical library networks in the world.
+              Founded in 2026, NIT-KKR LMS has stood as a beacon of knowledge and culture for over a century. What began as a modest reading room of 400 volumes has grown into one of the most comprehensive digital and physical library networks in the world.
             </p>
           </div>
 
@@ -588,7 +588,7 @@ export default function HomePage() {
                 We believe that access to knowledge should be universal. Our mission is to democratize reading by blending the warmth of traditional libraries with the reach of modern technology.
               </p>
               <p style={{ fontFamily:"'Raleway',sans-serif", fontSize:".9rem", color:"#8B7355", lineHeight:1.9, marginBottom:"32px" }}>
-                From rare manuscripts to bestselling novels, from children's picture books to doctoral dissertations — NITKLMS holds space for every story worth telling.
+                From rare manuscripts to bestselling novels, from children's picture books to doctoral dissertations, NIT-KKRLMS holds space for every story worth telling.
               </p>
               <button className="hp-btn-primary" style={{ padding:"14px 36px", fontSize:".82rem", borderRadius:"2px" }}
                 onClick={() => navigate("/signup")}>
@@ -601,7 +601,7 @@ export default function HomePage() {
               <Corners />
               <div style={{ fontSize:"5rem", color:"rgba(184,134,11,.15)", fontFamily:"'Cinzel',serif", lineHeight:1, marginBottom:"20px" }}>"</div>
               <p style={{ fontFamily:"'EB Garamond',serif", fontSize:"1.2rem", color:"#C4B89A", lineHeight:1.85, fontStyle:"italic", marginBottom:"28px" }}>
-                A library is not a luxury but one of the necessities of life. Within its walls lie infinite possibilities — every question answered, every dream seeded.
+                A library is not a luxury but one of the necessities of life. Within its walls lie infinite possibilities, every question answered, every dream seeded.
               </p>
               <div style={{ display:"flex", alignItems:"center", gap:"14px" }}>
                 <div style={{ width:"2px", height:"36px", background:"linear-gradient(to bottom,#B8860B,transparent)" }} />
@@ -673,7 +673,7 @@ export default function HomePage() {
               Open the Door to<br /><span className="hp-gold">Infinite Stories</span>
             </h2>
             <p style={{ fontFamily:"'EB Garamond',serif", fontSize:"1.1rem", color:"#8B7355", lineHeight:1.8, fontStyle:"italic", marginBottom:"40px" }}>
-              Join thousands of readers who have made NITKLMS their literary home. Free membership. Unlimited possibilities.
+              Join thousands of readers who have made NIT-KKRLMS their literary home. Free membership. Unlimited possibilities.
             </p>
             <div style={{ display:"flex", gap:"16px", justifyContent:"center", flexWrap:"wrap" }}>
               <button className="hp-btn-primary" style={{ padding:"16px 44px", fontSize:".85rem", borderRadius:"2px" }}
@@ -714,12 +714,12 @@ export default function HomePage() {
               <button onClick={() => window.scrollTo({ top:0, behavior:"smooth" })}
                 style={{ background:"none", border:"none", cursor:"pointer", display:"flex", alignItems:"center", gap:"12px", marginBottom:"20px", padding:0 }}>
                 <span style={{ fontSize:"24px" }}>📚</span>
-                <span style={{ fontFamily:"'Cinzel',serif", fontWeight:700, fontSize:"1.2rem" }} className="hp-gold">NITKLMS</span>
+                <span style={{ fontFamily:"'Cinzel',serif", fontWeight:700, fontSize:"1.2rem" }} className="hp-gold">NIT-KKRLMS</span>
               </button>
               <p style={{ fontFamily:"'Raleway',sans-serif", fontSize:".82rem", color:"#8B7355", lineHeight:1.9, maxWidth:"280px" }}>
                 A digital sanctuary for readers and scholars alike. Preserving the art of reading in the modern age.
               </p>
-              <div style={{ display:"flex", gap:"14px", marginTop:"24px" }}>
+              {/* <div style={{ display:"flex", gap:"14px", marginTop:"24px" }}>
                 {["𝕏","📘","📸","💼"].map((icon, i) => (
                   <button key={i}
                     style={{ width:"36px", height:"36px", border:"1px solid rgba(184,134,11,.25)", background:"transparent", color:"#8B7355", borderRadius:"2px", cursor:"pointer", fontSize:"14px", transition:"all .2s" }}
@@ -728,7 +728,7 @@ export default function HomePage() {
                     {icon}
                   </button>
                 ))}
-              </div>
+              </div> */}
             </div>
 
             {/* Footer nav cols */}
@@ -736,26 +736,26 @@ export default function HomePage() {
               { title:"Explore",
                 links:[
                   { l:"All Books",    fn:() => goToBooks()          },
-                  { l:"New Arrivals", fn:() => goToBooks()          },
-                  { l:"Bestsellers",  fn:() => goToBooks()          },
+                  // { l:"New Arrivals", fn:() => goToBooks()          },
+                  // { l:"Bestsellers",  fn:() => goToBooks()          },
                   { l:"Categories",   fn:() => goToBooks()          },
                   { l:"Authors",      fn:() => goToBooks()          },
                 ]},
               { title:"Account",
                 links:[
                   { l:"Sign Up",    fn:() => navigate("/signup")            },
-                  { l:"Sign In",    fn:() => navigate("/login")             },
+                  // { l:"Sign In",    fn:() => navigate("/login")             },
                   { l:"My Library", fn:() => navigate("/student/dashboard") },
                   { l:"History",    fn:() => navigate("/student/dashboard") },
-                  { l:"Settings",   fn:() => navigate("/student/dashboard") },
+                  // { l:"Settings",   fn:() => navigate("/student/dashboard") },
                 ]},
               { title:"Library",
                 links:[
                   { l:"About Us",   fn:() => scrollTo(aboutRef)  },
                   { l:"Membership", fn:() => navigate("/signup")  },
-                  { l:"Events",     fn:() => goToBooks()          },
+                  // { l:"Events",     fn:() => goToBooks()          },
                   { l:"Contact",    fn:() => scrollTo(footerRef)  },
-                  { l:"Help",       fn:() => navigate("/login")   },
+                  // { l:"Help",       fn:() => navigate("/login")   },Fs
                 ]},
             ].map((col) => (
               <div key={col.title}>
@@ -779,7 +779,7 @@ export default function HomePage() {
           {/* Bottom bar */}
           <div style={{ borderTop:"1px solid rgba(184,134,11,.1)", paddingTop:"28px", display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:"16px" }}>
             <p style={{ fontFamily:"'Raleway',sans-serif", fontSize:".75rem", color:"#8B7355", letterSpacing:".05em" }}>
-              © 2026 Bibliotheca Library Management. All rights reserved.
+              © 2026 NIT-KKRLMS Library Management. All rights reserved.
             </p>
             <p style={{ fontFamily:"'EB Garamond',serif", fontSize:".85rem", color:"rgba(184,134,11,.4)", fontStyle:"italic" }}>
               <span className="hp-ornament">✦</span> Where Every Book Finds Its Reader <span className="hp-ornament">✦</span>
