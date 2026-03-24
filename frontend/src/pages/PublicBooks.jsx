@@ -391,7 +391,7 @@ export default function PublicBooks() {
         <nav className="pb-nav">
           <div className="pb-nav-brand" onClick={() => navigate("/")}>
             <div className="pb-nav-logo">📚</div>
-            Scholar's Library
+             NIT-KKR LMS
           </div>
           <div className="pb-nav-actions">
             <button className="pb-nav-btn" onClick={() => navigate("/login")}>Sign In</button>
